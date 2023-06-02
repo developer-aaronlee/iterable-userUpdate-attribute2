@@ -1,0 +1,6 @@
+email,email_status,phone,sms_status
+apitest1@yopmail.com,subscribed,16073237677,subscribed
+apitest2@yopmail.com,subscribed,16073237677,unsubscribed
+apitest3@yopmail.com,unsubscribed,16073237677,pending
+apitest4@yopmail.com,unsubscribed,,
+apitest5@yopmail.com,unsubscribed,16073237677,pending
