@@ -72,25 +72,26 @@ for x in all_data:
     # print(f"Row {n}: Update Profile - {update_user}")
 
     update_response = requests.post(url=iterable_update, data=update_user, headers=api_headers)
-    print(f"Row {n}: email: {x[0]} phone: {x[2]} Response: ", update_response.json())
+    print(f"Row {n}: email: {x[0]} phone: {x[2] if x[2] != '' else 'n/a'} Response: ", update_response.json())
 
-    if x[1].lower() == "subscribed":
-        email_channel_url = subscription_url(iterable_subscribe, channel_name, email_channel_id, x[0])
-        email_channel_response = requests.patch(url=email_channel_url, headers=api_headers)
-        print(f"Row {n}: email channel: {x[1]} Response: ", email_channel_response.json())
+    if x[1] != "":
+        if x[1].lower() == "subscribed":
+            email_channel_url = subscription_url(iterable_subscribe, channel_name, email_channel_id, x[0])
+            email_channel_response = requests.patch(url=email_channel_url, headers=api_headers)
+            print(f"Row {n}: email channel: {x[1]} Response: ", email_channel_response.json())
 
-        email_type_url = subscription_url(iterable_subscribe, type_name, email_type_id, x[0])
-        email_type_response = requests.patch(url=email_type_url, headers=api_headers)
-        print(f"Row {n}: email type: {x[1]} Response: ", email_type_response.json())
+            email_type_url = subscription_url(iterable_subscribe, type_name, email_type_id, x[0])
+            email_type_response = requests.patch(url=email_type_url, headers=api_headers)
+            print(f"Row {n}: email type: {x[1]} Response: ", email_type_response.json())
 
-        # print(f"Row {n}: Email Subscribe - {email_channel_url}; {email_type_url}")
+            # print(f"Row {n}: Email Subscribe - {email_channel_url}; {email_type_url}")
 
-    else:
-        email_type_url = subscription_url(iterable_subscribe, type_name, email_type_id, x[0])
-        email_unsub_response = requests.delete(url=email_type_url, headers=api_headers)
-        print(f"Row {n}: email type: {x[1]} Response: ", email_unsub_response.json())
+        else:
+            email_type_url = subscription_url(iterable_subscribe, type_name, email_type_id, x[0])
+            email_unsub_response = requests.delete(url=email_type_url, headers=api_headers)
+            print(f"Row {n}: email type: {x[1]} Response: ", email_unsub_response.json())
 
-        # print(f"Row {n}: Email Unsubscribe - {email_type_url}")
+            # print(f"Row {n}: Email Unsubscribe - {email_type_url}")
 
     if x[3] != "":
         if x[3].lower() == "subscribed":
@@ -117,6 +118,4 @@ for x in all_data:
             print(f"Row {n}: sms type: {x[3]} Response: ", sms_unsub_response.json())
 
             # print(f"Row {n}: SMS Unsubscribe - {sms_type_url}")
-    else:
-        continue
 
