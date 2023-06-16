@@ -18,7 +18,7 @@ api_headers = {
     "Api-Key": "f435988be541463fb59da3e9d16d0925"
 }
 
-df = pd.read_csv("iterable_backfill_test.csv")
+df = pd.read_csv("iterable_popup_backfill.csv")
 # print(df.values)
 
 nan_values = df.isna()
@@ -29,7 +29,7 @@ df.fillna("", inplace=True)
 
 for i, r in df.iterrows():
     if r[2] != "":
-        df.loc[i, "phone"] = "+" + str(df.loc[i, "phone"]).split(".")[0]
+        df.iloc[i, 2] = "+" + str(df.iloc[i, 2]).split(".")[0]
 
 all_data = df.to_numpy()
 # print(all_data)
@@ -62,7 +62,7 @@ def subscription_url(link, kind, kind_id, email):
 
 
 n = 0
-for x in all_data:
+for x in all_data[12547::]:
     n += 1
     if x[2] != "":
         update_user = json.dumps(update_email_sms(x[0], x[2]))
