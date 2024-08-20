@@ -15,7 +15,7 @@ iterable_subscribe = "https://api.iterable.com/api/subscriptions"
 
 api_headers = {
     "Content-Type": "application/json",
-    "Api-Key": "f435988be541463fb59da3e9d16d0925"
+    "Api-Key": "api_key"
 }
 
 df = pd.read_csv("iterable_popup_backfill.csv")
